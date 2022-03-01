@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -53,6 +54,7 @@ public class EachRemainingDayService {
 
 
         //pozyskanie najnowszej symulacji by miec jej wartosci
+
         var simVal = getSimulationsValues();
         var newestSimulationsVal = simulationsValuesRepository
                 .getById(simVal.get(simVal.size() - 1).getId());
@@ -77,6 +79,7 @@ public class EachRemainingDayService {
 ////////////////////////
 
                 SimulationsValues simulation_values;
+                Simulation finalNewestSimulation = newestSimulation;
                 simulation_values = SimulationsValues.builder()
                         .day(i)// ok
 
@@ -84,31 +87,41 @@ public class EachRemainingDayService {
                                 ((newestSimulation.getHow_Many_One_Infects() + 1)
                                         * newestSimulationsVal.getNumber_Of_Infected()))// ok
 
-                        .number_Of_Infected((long) ((long) ((newestSimulation.getHow_Many_One_Infects() + 1)
-                                * newestSimulationsVal.getNumber_Of_Infected())
-                                - (newestSimulation.getMortality_Rate()//L24
-                                * (simulationsValuesRepository.findAll().get((int) (simulationsValuesRepository.findAll()
-                                .get((simulationsValuesRepository.findAll().size() - 1))
-                                .getDay() - newestSimulation.getNumber_Of_Days_To_Death())).getNumber_Of_Infected()))//V24
 
-                                - (1 - newestSimulation.getMortality_Rate()
-                                * (simulationsValuesRepository.findAll().get((int) (simulationsValuesRepository
-                                .findAll().get((simulationsValuesRepository.findAll().size() - 1))
-                                .getDay() - newestSimulation.getNumber_Of_Days_To_Recovery()))
-                                .getNumber_Of_Infected()))))//Z24
+                        .number_Of_Infected((long) ((long) ((newestSimulation.getHow_Many_One_Infects() + 1)
+                                * newestSimulationsVal.getNumber_Of_Infected())//L24
+/////////////////////////
+
+
+                                - (newestSimulation.getMortality_Rate() *
+                                (simulationsValuesRepository.findAll().stream()
+                                        .filter(e -> e.getDay() - finalNewestSimulation
+                                                .getNumber_Of_Days_To_Death() >= 0)
+                                        .collect(Collectors.toList()).get(simulationsValuesRepository
+                                                .findAll().size() - 1)).getNumber_Of_Infected())//V24 moze
+
+
+                                - (1 - newestSimulation.getMortality_Rate() *
+                                (simulationsValuesRepository.findAll().stream()
+                                        .filter(e -> e.getDay() - finalNewestSimulation
+                                                .getNumber_Of_Days_To_Recovery() >= 0)
+                                        .collect(Collectors.toList()).get(simulationsValuesRepository
+                                                .findAll().size() - 1)).getNumber_Of_Infected())))//Z24 moze
 
 
                         .regained_Health_And_Immunity((long) ((1 - newestSimulation.getMortality_Rate()
-                                * (simulationsValuesRepository.findAll().get((int) (simulationsValuesRepository
-                                .findAll().get((simulationsValuesRepository.findAll().size() - 1))
-                                .getDay() - newestSimulation.getNumber_Of_Days_To_Recovery()))
-                                .getNumber_Of_Infected()))))// Z24
+                                * (simulationsValuesRepository.findAll().stream()
+                                .filter(e -> e.getDay() - finalNewestSimulation.getNumber_Of_Days_To_Recovery() >= 0)
+                                .collect(Collectors.toList()).get(simulationsValuesRepository
+                                        .findAll().size() - 1)).getNumber_Of_Infected())))// Z24 moze
 
 
-                        .dead((long) (newestSimulation.getMortality_Rate()//L24
-                                * (simulationsValuesRepository.findAll().get((int) (simulationsValuesRepository
-                                .findAll().get((simulationsValuesRepository.findAll().size() - 1))
-                                .getDay() - newestSimulation.getNumber_Of_Days_To_Death())).getNumber_Of_Infected())))//V24
+                        .dead((long) (newestSimulation.getMortality_Rate() *
+                                ((simulationsValuesRepository.findAll().stream()
+                                        .filter(e -> e.getDay() - finalNewestSimulation
+                                                .getNumber_Of_Days_To_Death() >= 0)
+                                        .collect(Collectors.toList()).get(simulationsValuesRepository
+                                                .findAll().size() - 1)).getNumber_Of_Infected())))//V24
 
                         .build();
 

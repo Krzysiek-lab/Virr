@@ -19,26 +19,31 @@
         <a>Simulation name</a>
         <input type="text" th:field="*{simulation_Name}" placeholder="simulation name" class="form-control mb-4 col-4">
 
-        <div th:if="${#fields.hasErrors('population_Size')}" th:errors="*{population_Size}">Invalid population size
+        <div th:if="${#fields.hasErrors('population_Size')}" th:errors="*{population_Size}">Invalid population
+            size
         </div>
         <a>Population size</a>
         <input type="text" th:field="*{population_Size}" placeholder="population size" class="form-control mb-4 col-4">
 
-        <div th:if="${#fields.hasErrors('initial_Infected_Number')}" th:errors="*{initial_Infected_Number}">Invalid
+        <div th:if="${#fields.hasErrors('initial_Infected_Number')}" th:errors="*{initial_Infected_Number}">
+            Invalid
             initial infected number
         </div>
         <a>Initial infected number</a>
         <input type="text" th:field="*{initial_Infected_Number}" placeholder="initial infected number"
                class="form-control mb-4 col-4">
 
-        <div th:if="${#fields.hasErrors('how_Many_One_Infects')}" th:errors="*{how_Many_One_Infects}">Invalid initial R
+        <div th:if="${#fields.hasErrors('how_Many_One_Infects')}" th:errors="*{how_Many_One_Infects}">Invalid
+            initial R
             value
         </div>
         <a>How many people one person infects</a>
         <input type="text" th:field="*{how_Many_One_Infects}" placeholder="R i.e. how many one person infects"
                class="form-control mb-4 col-4">
 
-        <div th:if="${#fields.hasErrors('mortality_Rate')}" th:errors="*{mortality_Rate}">Invalid mortality rate</div>
+        <div th:if="${#fields.hasErrors('mortality_Rate')}" th:errors="*{mortality_Rate}">Invalid mortality
+            rate
+        </div>
         <a>How many infected people die</a>
         <input type="text" th:field="*{mortality_Rate}" placeholder="mortality rate" class="form-control mb-4 col-4">
 
@@ -98,8 +103,6 @@ function addClass() {
 button.addEventListener('click', toggleClass);
 button.addEventListener('transitionend', toggleClass);
 button.addEventListener('transitionend', addClass);
-
-
 
 
 
