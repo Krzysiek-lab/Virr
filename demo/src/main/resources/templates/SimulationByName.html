@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>End Value</title>
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <style>
+#simulat {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#simulat td, #simulat th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#simulat tr:nth-child(even){background-color: #f2f2f2;}
+
+#simulat tr:hover {background-color: #ddd;}
+
+#simulat th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+<table id="simulat" class="table table-bordered">
+    <tr class="table-striped">
+        <th>Name</th>
+        <th>Size</th>
+        <th>Initial infected</th>
+        <th>How many one infects</th>
+        <th>Mortality rate</th>
+        <th>Days to recover</th>
+        <th>Days to die</th>
+        <th>Simulation time</th>
+        <th>Actions</th>
+    </tr>
+    <th:block th:each="sim: ${simulations}">
+        <tr>
+            <td th:text="${sim.simulation_Name}"></td>
+            <td th:text="${sim.population_Size}"></td>
+            <td th:text="${sim.initial_Infected_Number}"></td>
+            <td th:text="${sim.how_Many_One_Infects}"></td>
+            <td th:text="${sim.mortality_Rate}"></td>
+            <td th:text="${sim.number_Of_Days_To_Recovery}"></td>
+            <td th:text="${sim.number_Of_Days_To_Death}"></td>
+            <td th:text="${sim.simulation_Time}"></td>
+            <td>
+                <a th:href="@{/updateSimulation/{id}(id=${sim.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/deleteSimulation/{id}(id=${sim.id})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/SimulationsValuesById/{id}(id=${sim.id})}" class="btn btn-primary">
+                    Show values</a>
+            </td>
+        </tr>
+    </th:block>
+</table>
+<div style="display: inline" th:if="${allP.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/allSimulations(size=${allP.size}, page=${pageNumber})}"
+       th:text=${pageNumber}
+       th:class="${pageNumber==allP.number + 1} ? active"></a>
+</div>
+<br>
+<br>
+<td>
+    <a th:href="@{~/SimulationsForm}" class="btn btn-primary">Back to simulation form site</a>
+    <a th:href="@{~/SimulationsValues}" class="btn btn-primary">Back to simulation values site</a>
+</td>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</html>

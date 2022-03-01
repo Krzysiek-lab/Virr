@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulations per day</title>
+
+    <style>
+#simulat {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#simulat td, #simulat th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#simulat tr:nth-child(even){background-color: #f2f2f2;}
+
+#simulat tr:hover {background-color: #ddd;}
+
+#simulat th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+
+    </style>
+</head>
+<body>
+<div class="container m-2">
+    <h1>Per day</h1>
+    <table id="simulat" border="1" class="table table-striped table-responsive-md">
+        <tr>
+            <th>Pv</th>
+            <th>Pr</th>
+            <th>Pi</th>
+            <th>Pm</th>
+            <th>Day</th>
+        </tr>
+        <th:block th:each="sim :${simulations}">
+            <tr>
+                <td th:text="${sim.healthy_Prone_To_Infection}"></td>
+                <td th:text="${sim.regained_Health_And_Immunity}"></td>
+                <td th:text="${sim.number_Of_Infected}"></td>
+                <td th:text="${sim.dead}"></td>
+                <td th:text="${sim.day}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+<br>
+<br>
+<td>
+    <a th:href="@{~/SimulationsForm}" class="btn btn-primary">Back to simulation form site</a>
+    <a th:href="@{~/SimulationsValues}" class="btn btn-primary">Back to simulation values site</a>
+</td>
+</body>
+</html>

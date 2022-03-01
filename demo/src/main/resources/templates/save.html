@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New Simulation</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/button_style.css}"
+          type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Save</h1>
+    <hr>
+    <h2>Save simulation</h2>
+
+    <form action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
+        <div th:if="${#fields.hasErrors('simulation_Name')}" th:errors="*{simulation_Name}">Invalid Name</div>
+        <a>Simulation name</a>
+        <input type="text" th:field="*{simulation_Name}" placeholder="simulation name" class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('population_Size')}" th:errors="*{population_Size}">Invalid population size
+        </div>
+        <a>Population size</a>
+        <input type="text" th:field="*{population_Size}" placeholder="population size" class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('initial_Infected_Number')}" th:errors="*{initial_Infected_Number}">Invalid
+            initial infected number
+        </div>
+        <a>Initial infected number</a>
+        <input type="text" th:field="*{initial_Infected_Number}" placeholder="initial infected number"
+               class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('how_Many_One_Infects')}" th:errors="*{how_Many_One_Infects}">Invalid initial R
+            value
+        </div>
+        <a>How many people one person infects</a>
+        <input type="text" th:field="*{how_Many_One_Infects}" placeholder="R i.e. how many one person infects"
+               class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('mortality_Rate')}" th:errors="*{mortality_Rate}">Invalid mortality rate</div>
+        <a>How many infected people die</a>
+        <input type="text" th:field="*{mortality_Rate}" placeholder="mortality rate" class="form-control mb-4 col-4">
+
+        <div class="form-group row ">
+            <div class="col-sm-8">
+                <span class="text-danger" th:errors="*{global}"> </span>
+            </div>
+        </div>
+
+        <div th:if="${#fields.hasErrors('number_Of_Days_To_Recovery')}" th:errors="*{number_Of_Days_To_Recovery}">
+            Invalid number
+        </div>
+        <a>Number of days to recovery</a>
+        <input type="text" th:field="*{number_Of_Days_To_Recovery}" placeholder="number of days to recovery"
+               class="form-control mb-4 col-4">
+
+        <div class="form-group row ">
+            <div class="col-sm-8">
+                <span class="text-danger" th:errors="*{global}"> </span>
+            </div>
+        </div>
+        <div th:if="${#fields.hasErrors('number_Of_Days_To_Death')}" th:errors="*{number_Of_Days_To_Death}">Invalid
+            number
+        </div>
+        <a>Number of days to death</a>
+        <input type="text" th:field="*{number_Of_Days_To_Death}" placeholder="number of days to death"
+               class="form-control mb-4 col-4">
+
+
+        <div th:if="${#fields.hasErrors('simulation_Time')}" th:errors="*{simulation_Time}">Invalid number of days</div>
+        <a>Simulation time</a>
+        <input type="text" th:field="*{simulation_Time}" placeholder="simulation duration"
+               class="form-control mb-4 col-4">
+
+
+        <!--        <button type="submit" class="btn btn-info col-2">Save</button>-->
+        <button class="button">
+            <span class="submit">Submit</span>
+            <span class="loading"><i class="fa fa-refresh"></i></span>
+            <span class="check"><i class="fa fa-check"></i></span>
+        </button>
+    </form>
+    <hr>
+</div>
+<script>
+const button = document.querySelector('.button');
+const submit = document.querySelector('.submit');
+
+function toggleClass() {
+	this.classList.toggle('active');
+}
+
+function addClass() {
+	this.classList.add('finished');
+}
+
+button.addEventListener('click', toggleClass);
+button.addEventListener('transitionend', toggleClass);
+button.addEventListener('transitionend', addClass);
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</html>

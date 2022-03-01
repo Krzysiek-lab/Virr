@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Simulation</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/button_style.css/button_style.css" th:href="@{/button_style.css}"
+</head>
+<body>
+<div class="container">
+    <h1>Update</h1>
+    <hr>
+    <h2>Update simulation</h2>
+
+    <form action="#" th:action="@{~/SimulationsForm}" th:object="${sim}" method="POST">
+        <input th:value="${sim.id}" type="hidden" th:field="*{id}">
+        <div th:if="${#fields.hasErrors('simulation_Name')}" th:errors="*{simulation_Name}">Invalid Name</div>
+        <input type="text" th:field="*{simulation_Name}" placeholder="simulation name" class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('population_Size')}" th:errors="*{population_Size}">Invalid population size
+        </div>
+        <input type="text" th:field="*{population_Size}" placeholder="population size" class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('initial_Infected_Number')}" th:errors="*{initial_Infected_Number}">Invalid
+            initial infected number
+        </div>
+        <input type="text" th:field="*{initial_Infected_Number}" placeholder="initial infected number"
+               class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('how_Many_One_Infects')}" th:errors="*{how_Many_One_Infects}">Invalid initial R
+            value
+        </div>
+        <input type="text" th:field="*{how_Many_One_Infects}" placeholder="R i.e. how many one person infects"
+               class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('mortality_Rate')}" th:errors="*{mortality_Rate}">Invalid mortality rate</div>
+        <input type="text" th:field="*{mortality_Rate}" placeholder="mortality rate" class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('number_Of_Days_To_Recovery')}" th:errors="*{number_Of_Days_To_Recovery}">
+            Invalid number
+        </div>
+        <input type="text" th:field="*{number_Of_Days_To_Recovery}" placeholder="number of days to recovery"
+               class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('number_Of_Days_To_Death')}" th:errors="*{number_Of_Days_To_Death}">Invalid
+            number
+        </div>
+        <input type="text" th:field="*{number_Of_Days_To_Death}" placeholder="number of days to death"
+               class="form-control mb-4 col-4">
+
+        <div th:if="${#fields.hasErrors('simulation_Time')}" th:errors="*{simulation_Time}">Invalid number of days</div>
+        <input type="text" th:field="*{simulation_Time}" placeholder="simulation duration"
+               class="form-control mb-4 col-4">
+
+
+        <!--        <button type="submit" class="btn btn-info col-2">Update</button>-->
+        <button class="button">
+            <span class="submit">Submit</span>
+            <span class="loading"><i class="fa fa-refresh"></i></span>
+            <span class="check"><i class="fa fa-check"></i></span>
+        </button>
+
+
+    </form>
+    <hr>
+</div>
+<script>
+const button = document.querySelector('.button');
+const submit = document.querySelector('.submit');
+
+function toggleClass() {
+	this.classList.toggle('active');
+}
+
+function addClass() {
+	this.classList.add('finished');
+}
+
+button.addEventListener('click', toggleClass);
+button.addEventListener('transitionend', toggleClass);
+button.addEventListener('transitionend', addClass);
+</script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</html>
