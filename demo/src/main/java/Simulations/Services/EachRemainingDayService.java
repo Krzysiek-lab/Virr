@@ -97,31 +97,40 @@ public class EachRemainingDayService {
                                 (simulationsValuesRepository.findAll().stream()
                                         .filter(e -> e.getDay() - finalNewestSimulation
                                                 .getNumber_Of_Days_To_Death() >= 0)
-                                        .collect(Collectors.toList()).get(simulationsValuesRepository
-                                                .findAll().size() - 1)).getNumber_Of_Infected())//V24 moze
+                                        .collect(Collectors.toList()).get((int) simulationsValuesRepository.findAll()
+                                                .stream().filter(e -> e.getDay() - finalNewestSimulation.
+                                                        getNumber_Of_Days_To_Death() >= 0)
+                                                .count() - 1)).getNumber_Of_Infected())//V24 moze
 
 
                                 - (1 - newestSimulation.getMortality_Rate() *
                                 (simulationsValuesRepository.findAll().stream()
                                         .filter(e -> e.getDay() - finalNewestSimulation
                                                 .getNumber_Of_Days_To_Recovery() >= 0)
-                                        .collect(Collectors.toList()).get(simulationsValuesRepository
-                                                .findAll().size() - 1)).getNumber_Of_Infected())))//Z24 moze
+                                        .collect(Collectors.toList()).get((int) simulationsValuesRepository
+                                                .findAll().stream().filter(e -> e.getDay() - finalNewestSimulation
+                                                        .getNumber_Of_Days_To_Recovery() >= 0).count() - 1))
+                                        .getNumber_Of_Infected())))//Z24 moze
 
 
                         .regained_Health_And_Immunity((long) ((1 - newestSimulation.getMortality_Rate()
                                 * (simulationsValuesRepository.findAll().stream()
                                 .filter(e -> e.getDay() - finalNewestSimulation.getNumber_Of_Days_To_Recovery() >= 0)
-                                .collect(Collectors.toList()).get(simulationsValuesRepository
-                                        .findAll().size() - 1)).getNumber_Of_Infected())))// Z24 moze
+                                .collect(Collectors.toList()).get((int) simulationsValuesRepository.findAll().stream()
+                                        .filter(e -> e.getDay() - finalNewestSimulation
+                                                .getNumber_Of_Days_To_Recovery() >= 0).count() - 1))
+                                .getNumber_Of_Infected())))// Z24 moze
 
 
                         .dead((long) (newestSimulation.getMortality_Rate() *
                                 ((simulationsValuesRepository.findAll().stream()
                                         .filter(e -> e.getDay() - finalNewestSimulation
                                                 .getNumber_Of_Days_To_Death() >= 0)
-                                        .collect(Collectors.toList()).get(simulationsValuesRepository
-                                                .findAll().size() - 1)).getNumber_Of_Infected())))//V24
+                                        .collect(Collectors.toList()).get((int) simulationsValuesRepository
+                                                .findAll().stream()
+                                                .filter(e -> e.getDay() - finalNewestSimulation
+                                                        .getNumber_Of_Days_To_Death() >= 0).count() - 1))
+                                        .getNumber_Of_Infected())))//V24
 
                         .build();
 
