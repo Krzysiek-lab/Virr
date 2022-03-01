@@ -56,11 +56,11 @@ public class DayOneService {
                 .regained_Health_And_Immunity(0L)
                 .build();
         var s = simulationsValuesRepository.save(simulation_values);
-        var s2 = simulationsValuesRepository.save(simulation_values);//szopka poczatek
+//        var s2 = simulationsValuesRepository.save(simulation_values);//szopka poczatek
 
         var simm = simulations.getSimulationsValues();
         simm.add(s);
-        simm.add(s2);//szopka cd.
+//        simm.add(s2);//szopka cd.
         simulations.setSimulationsValues(simm);
         simulationRepository.save(simulations);
         return "";
