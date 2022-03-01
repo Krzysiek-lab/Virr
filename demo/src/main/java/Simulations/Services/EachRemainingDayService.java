@@ -48,12 +48,8 @@ public class EachRemainingDayService {
     public void SimulationParametersForRemainingDays() {
 
 
-        //pozyskanie najnowszej symulacji by miec jej paramtery wejsciowe
         var sim = getSimulations();
         var newestSimulation = simulationRepository.getById(sim.get(sim.size() - 1).getId());
-
-
-        //pozyskanie najnowszej symulacji by miec jej wartosci
 
         var simVal = getSimulationsValues();
         var newestSimulationsVal = simulationsValuesRepository
@@ -66,17 +62,16 @@ public class EachRemainingDayService {
                 break;
             }
 
-            if (i >= newestSimulation.getNumber_Of_Days_To_Recovery()) {
+            if (i > newestSimulation.getNumber_Of_Days_To_Death()
+                    && i <= newestSimulation.getNumber_Of_Days_To_Recovery()) {
 
-/////////////////////////
                 sim = getSimulations();
                 newestSimulation = simulationRepository.getById(sim.get(sim.size() - 1).getId());
-
 
                 simVal = getSimulationsValues();
                 newestSimulationsVal = simulationsValuesRepository
                         .getById(simVal.get(simVal.size() - 1).getId());
-////////////////////////
+
 
                 SimulationsValues simulation_values;
                 Simulation finalNewestSimulation = newestSimulation;
@@ -97,10 +92,66 @@ public class EachRemainingDayService {
                                 (simulationsValuesRepository.findAll().stream()
                                         .filter(e -> e.getDay() - finalNewestSimulation
                                                 .getNumber_Of_Days_To_Death() >= 0)
-                                        .collect(Collectors.toList()).get((int) simulationsValuesRepository.findAll()
+                                        .collect(Collectors.toList()).get(simulationsValuesRepository.findAll()
                                                 .stream().filter(e -> e.getDay() - finalNewestSimulation.
-                                                        getNumber_Of_Days_To_Death() >= 0)
-                                                .count() - 1)).getNumber_Of_Infected())//V24 moze
+                                                        getNumber_Of_Days_To_Death() >= 0).collect(Collectors.toList())
+                                                .size() - 1)).getNumber_Of_Infected())))//Z24 moze
+
+
+                        .regained_Health_And_Immunity(0L)// Z24 moze
+
+
+                        .dead((long) (newestSimulation.getMortality_Rate() *
+                                ((simulationsValuesRepository.findAll().stream()
+                                        .filter(e -> e.getDay() - finalNewestSimulation
+                                                .getNumber_Of_Days_To_Death() >= 0)
+                                        .collect(Collectors.toList()).get((int) simulationsValuesRepository
+                                                .findAll().stream()
+                                                .filter(e -> e.getDay() - finalNewestSimulation
+                                                        .getNumber_Of_Days_To_Death() >= 0).count() - 1))
+                                        .getNumber_Of_Infected())))//V24
+
+                        .build();
+
+                var simId = simulationsValuesRepository.save(simulation_values);
+                var simVal2 = newestSimulation.getSimulationsValues();
+                simVal2.add(simId);
+                newestSimulation.setSimulationsValues(simVal2);
+                simulationRepository.save(newestSimulation);
+
+            } else if (i > newestSimulation.getNumber_Of_Days_To_Recovery()) {// to_Death()
+
+                sim = getSimulations();
+                newestSimulation = simulationRepository.getById(sim.get(sim.size() - 1).getId());
+
+                simVal = getSimulationsValues();
+                newestSimulationsVal = simulationsValuesRepository
+                        .getById(simVal.get(simVal.size() - 1).getId());
+
+
+                SimulationsValues simulation_values;
+                Simulation finalNewestSimulation = newestSimulation;
+                simulation_values = SimulationsValues.builder()
+                        .day(i)// ok
+
+                        .healthy_Prone_To_Infection(newestSimulation.getPopulation_Size() -
+                                ((newestSimulation.getHow_Many_One_Infects() + 1)
+                                        * newestSimulationsVal.getNumber_Of_Infected()))// ok
+
+
+                        .number_Of_Infected((long) ((long) ((newestSimulation.getHow_Many_One_Infects() + 1)
+                                * newestSimulationsVal.getNumber_Of_Infected())//L24
+/////////////////////////
+
+
+                                - (newestSimulation.getMortality_Rate() *
+                                (simulationsValuesRepository.findAll().stream()
+                                        .filter(e -> e.getDay() - finalNewestSimulation
+                                                .getNumber_Of_Days_To_Death() >= 0)
+                                        .collect(Collectors.toList()).get(simulationsValuesRepository.findAll()
+                                                .stream().filter(e -> e.getDay() - finalNewestSimulation.
+                                                        getNumber_Of_Days_To_Death() >= 0).collect(Collectors.toList())
+                                                .size() - 1)).getNumber_Of_Infected())//V24 moze
 
 
                                 - (1 - newestSimulation.getMortality_Rate() *
@@ -137,12 +188,11 @@ public class EachRemainingDayService {
                 var simId = simulationsValuesRepository.save(simulation_values);
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId);
-                newestSimulation.setSimulationsValues(simVal);
+                newestSimulation.setSimulationsValues(simVal2);
                 simulationRepository.save(newestSimulation);
 
             } else {
 
-                /////////////////////////
                 sim = getSimulations();
                 newestSimulation = simulationRepository.getById(sim.get(sim.size() - 1).getId());
 
@@ -150,7 +200,6 @@ public class EachRemainingDayService {
                 simVal = getSimulationsValues();
                 newestSimulationsVal = simulationsValuesRepository
                         .getById(simVal.get(simVal.size() - 1).getId());
-                ////////////////////////
 
 
                 SimulationsValues simulation_values;
@@ -171,13 +220,13 @@ public class EachRemainingDayService {
                 var simId2 = simulationsValuesRepository.save(simulation_values);
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId2);
-                newestSimulation.setSimulationsValues(simVal);
+                newestSimulation.setSimulationsValues(simVal2);
                 simulationRepository.save(newestSimulation);
 
             }
         }
 
-        simulationsValuesRepository.delete(simulationsValuesRepository.findAll().get(0));//szopka cd
+//        simulationsValuesRepository.delete(simulationsValuesRepository.findAll().get(0));//szopka cd
     }
 
 

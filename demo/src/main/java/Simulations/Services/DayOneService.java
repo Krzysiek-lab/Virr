@@ -50,7 +50,7 @@ public class DayOneService {
 
         var simulation_values = SimulationsValues.builder()
                 .day(1L)
-                .healthy_Prone_To_Infection(simulation.getHow_Many_One_Infects())
+                .healthy_Prone_To_Infection(simulation.getPopulation_Size() - simulation.getInitial_Infected_Number())
                 .number_Of_Infected(simulation.getInitial_Infected_Number())
                 .dead(0L)
                 .regained_Health_And_Immunity(0L)
