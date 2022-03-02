@@ -28,10 +28,10 @@ public class SimulationsValues {
     private Double healthy_Prone_To_Infection;
 
     @Column(name = "Pm")
-    private Long dead;
+    private Double dead;
 
     @Column(name = "Pr")
-    private Long regained_Health_And_Immunity;
+    private Double regained_Health_And_Immunity;
 
     @JoinColumn(name = "simulation_id")
     @ManyToOne

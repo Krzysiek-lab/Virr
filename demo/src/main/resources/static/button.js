@@ -1,7 +1,8 @@
-    const btn = document.querySelector("#btn");
-        const btnText = document.querySelector("#btnText");
+const form = document.getElementById('form');
 
-        btn.onclick = () => {
-            btnText.innerHTML = "Thanks";
-            btn.classList.add("active");
-        };
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+  const button = form.querySelector('button');
+  button.classList.add('loading');
+  button.disabled = true;
+});

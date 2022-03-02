@@ -80,16 +80,45 @@
 
 
         <!--        <button type="submit" class="btn btn-info col-2">Save</button>-->
-        <div class="container">
-            <button id="btn">
-                <p id="btnText">Submit</p>
-                <div class="check-box">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                        <path fill="transparent" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                    </svg>
-                </div>
+
+
+        <button type="submit">
+            <span>Send</span>
+            <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    class="loader loading"
+                    viewBox="0 0 38 38"
+            >
+                <g
+                        transform="translate(2 2)"
+                        stroke="currentColor"
+                        stroke-width="4"
+                        fill-rule="evenodd"
+                >
+                    <circle class="st0" stroke-opacity=".5" cx="17" cy="17" r="16.5"></circle>
+                    <path
+                            class="st1"
+                            d="M33.5 17C33.5 7.9 26.1.5 17 .5"
+                            transform="rotate(249.767 17 17)"
+                    >
+                        <animateTransform
+                                accumulate="none"
+                                additive="replace"
+                                attributeName="transform"
+                                calcMode="linear"
+                                dur="1s"
+                                from="0 17 17"
+                                repeatCount="indefinite"
+                                restart="always"
+                                to="360 17 17"
+                                type="rotate"
+                        ></animateTransform>
+                    </path>
+                </g>
+            </svg>
+        </button>
     </form>
-    <hr>
 </div>
 </body>
 <script type="text/javascript" th:src="@{/button.js}"></script>

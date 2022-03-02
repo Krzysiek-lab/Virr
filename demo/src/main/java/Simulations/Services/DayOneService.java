@@ -52,15 +52,14 @@ public class DayOneService {
                 .day(1L)
                 .healthy_Prone_To_Infection(simulation.getPopulation_Size() - simulation.getInitial_Infected_Number())
                 .number_Of_Infected(simulation.getInitial_Infected_Number())
-                .dead(0L)
-                .regained_Health_And_Immunity(0L)
+                .dead(0d)
+                .regained_Health_And_Immunity(0d)
                 .build();
         var s = simulationsValuesRepository.save(simulation_values);
-//        var s2 = simulationsValuesRepository.save(simulation_values);//szopka poczatek
+
 
         var simm = simulations.getSimulationsValues();
         simm.add(s);
-//        simm.add(s2);//szopka cd.
         simulations.setSimulationsValues(simm);
         simulationRepository.save(simulations);
         return "";
