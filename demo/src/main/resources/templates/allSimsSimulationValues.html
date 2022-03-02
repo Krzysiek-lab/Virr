@@ -59,7 +59,7 @@
 </table>
 <div style="display: inline" th:if="${all.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/SimulationsValuesById/{id}(size=${all.size}, page=${pageNumber})}"
+    <a th:href="@{/SimulationsValuesById/{id}/(size=${all.size}, page=${pageNumber})}"
        th:text=${pageNumber}
        th:class="${pageNumber==all.number + 1} ? active"></a>
 </div>

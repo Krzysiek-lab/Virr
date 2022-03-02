@@ -128,7 +128,7 @@ public class SimulationController {
     }
 
 
-    @GetMapping("SimulationsValuesById/{id}")
+    @GetMapping("SimulationsValuesById/{id}/")
     public String showSimulationsValuesForSimulation(@PathVariable("id") Long id,
                                                      @RequestParam(value = "page", defaultValue = "1") Integer page,
                                                      @RequestParam(value = "size", defaultValue = "5") Integer size,
