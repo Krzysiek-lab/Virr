@@ -38,6 +38,11 @@
 
 
 
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -74,20 +79,22 @@
        th:class="${pageNumber==all.number + 1} ? active"></a>
 </div>
 <br>
+Provide simulation name
 <input id="vall2" type="text" class="form-control col-2">
-<button onclick="myFunction2()" class="btn btn-primary">Find by simulation values by day</button>
+<br>
+Provide day
+<input id="vall3" type="text" class="form-control col-2"><br>
+<button onclick="myFunction2()" class="btn btn-primary">Find simulation values for given day for specific simulation by
+    name
+</button>
 <br>
 <br>
 <script>
 function myFunction2() {
   var intt = document.getElementById("vall2").value;
-location.href = 'http://localhost:8080/SimulationsValues/'+intt;
+  var intt2 = document.getElementById("vall3").value;
+location.href = 'http://localhost:8080/SimulationsValues/'+intt+'/'+intt2;
 }
-
-
-
-
-
 </script>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

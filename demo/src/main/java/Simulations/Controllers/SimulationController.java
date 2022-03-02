@@ -102,9 +102,11 @@ public class SimulationController {
     }
 
 
-    @GetMapping("SimulationsValues/{day}")//to poprawic by dawalo konkretny dzien z konkretnej symulacji
-    public String showSimulationsPerDay(@PathVariable("day") Long day, Model model) {
-        model.addAttribute("simulations", simulationsValuesRepository.findByDay(day));
+    @GetMapping("SimulationsValues/{name}/{day}")//to poprawic by dawalo konkretny dzien z konkretnej symulacji
+    public String showSimulationsPerDay(@PathVariable("day") Double day, @PathVariable("name") String name, Model model) {
+        var simulation = simulationRepository.findByName(name);
+        model.addAttribute("simulations", simulation.getSimulationsValues().stream().filter(e -> e.getDay()
+                .equals(day)));
         return "sims";
     }
 
