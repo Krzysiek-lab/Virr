@@ -1,14 +1,7 @@
-const button = document.querySelector('.button');
-const submit = document.querySelector('.submit');
+    const btn = document.querySelector("#btn");
+        const btnText = document.querySelector("#btnText");
 
-function toggleClass() {
-	this.classList.toggle('active');
-}
-
-function addClass() {
-	this.classList.add('finished');
-}
-
-button.addEventListener('click', toggleClass);
-button.addEventListener('transitionend', toggleClass);
-button.addEventListener('transitionend', addClass);
+        btn.onclick = () => {
+            btnText.innerHTML = "Thanks";
+            btn.classList.add("active");
+        };
