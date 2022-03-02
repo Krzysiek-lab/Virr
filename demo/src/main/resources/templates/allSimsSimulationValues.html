@@ -33,6 +33,11 @@
 
 
 
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -42,20 +47,25 @@
     <a th:href="@{~/SimulationsValues}" class="btn btn-primary">Back to simulation values site</a>
 </td>
 <table id="simulat" border="1" class="table table-striped table-responsive-md">
+    <thead>
     <tr>
         <th>Pv</th>
         <th>Pr</th>
         <th>Pi</th>
         <th>Pm</th>
     </tr>
-    <th:block th:each="sim :${simulationsValues}">
-        <tr>
-            <td th:text="${sim.healthy_Prone_To_Infection}"></td>
-            <td th:text="${sim.regained_Health_And_Immunity}"></td>
-            <td th:text="${sim.number_Of_Infected}"></td>
-            <td th:text="${sim.dead}"></td>
-        </tr>
-    </th:block>
+    </thead>
+    <tbody>
+    <!--    <th:block th:each="sim :${simulationsValues}">-->
+    <tr th:each="sim, iStat : ${all.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${sim.healthy_Prone_To_Infection}"></td>
+        <td th:text="${sim.regained_Health_And_Immunity}"></td>
+        <td th:text="${sim.number_Of_Infected}"></td>
+        <td th:text="${sim.dead}"></td>
+    </tr>
+    </tbody>
 </table>
 <div style="display: inline" th:if="${all.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
@@ -73,6 +83,11 @@ function myFunction2() {
   var intt = document.getElementById("vall2").value;
 location.href = 'http://localhost:8080/SimulationsValues/'+intt;
 }
+
+
+
+
+
 </script>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

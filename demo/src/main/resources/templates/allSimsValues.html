@@ -29,26 +29,36 @@
 }
 
 
+
+
+
     </style>
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="container m-2">
     <h1>Values</h1>
     <table id="simulat" border="1" class="table table-striped table-responsive-md">
+        <thead>
         <tr>
             <th>Pv</th>
             <th>Pr</th>
             <th>Pi</th>
             <th>Pm</th>
         </tr>
-        <th:block th:each="sim :${simulationsValues}">
-            <tr>
-                <td th:text="${sim.healthy_Prone_To_Infection}"></td>
-                <td th:text="${sim.regained_Health_And_Immunity}"></td>
-                <td th:text="${sim.number_Of_Infected}"></td>
-                <td th:text="${sim.dead}"></td>
-            </tr>
-        </th:block>
+        </thead>
+        <tbody>
+        <!--        <th:block th:each="sim :${simulationsValues}">-->
+        <tr th:each="sim, iStat : ${allP.content}"
+            th:style="${iStat.odd}? 'font-weight: bold;'"
+            th:alt-title="${iStat.even}? 'even' : 'odd'">
+            <td th:text="${sim.healthy_Prone_To_Infection}"></td>
+            <td th:text="${sim.regained_Health_And_Immunity}"></td>
+            <td th:text="${sim.number_Of_Infected}"></td>
+            <td th:text="${sim.dead}"></td>
+        </tr>
+        </tbody>
     </table>
     <div style="display: inline" th:if="${allP.totalPages > 0}" class="pagination"
          th:each="pageNumber : ${pageNumbers}">

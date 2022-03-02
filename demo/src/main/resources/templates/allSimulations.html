@@ -33,11 +33,15 @@
 
 
 
+
+
+
     </style>
 </head>
 <body>
 
 <table id="simulat" class="table table-bordered">
+    <thead>
     <tr class="table-striped">
         <th>Name</th>
         <th>Size</th>
@@ -49,24 +53,28 @@
         <th>Simulation time</th>
         <th>Actions</th>
     </tr>
-    <th:block th:each="sim: ${all}">
-        <tr>
-            <td th:text="${sim.simulation_Name}"></td>
-            <td th:text="${sim.population_Size}"></td>
-            <td th:text="${sim.initial_Infected_Number}"></td>
-            <td th:text="${sim.how_Many_One_Infects}"></td>
-            <td th:text="${sim.mortality_Rate}"></td>
-            <td th:text="${sim.number_Of_Days_To_Recovery}"></td>
-            <td th:text="${sim.number_Of_Days_To_Death}"></td>
-            <td th:text="${sim.simulation_Time}"></td>
-            <td>
-                <a th:href="@{/updateSimulation/{id}(id=${sim.id})}" class="btn btn-primary">Update</a>
-                <a th:href="@{/deleteSimulation/{id}(id=${sim.id})}" class="btn btn-danger">Delete</a>
-                <a th:href="@{/SimulationsValuesById/{id}/(id=${sim.id})}" class="btn btn-primary">
-                    Show values</a>
-            </td>
-        </tr>
-    </th:block>
+    </thead>
+    <tbody>
+    <!--    <th:block th:each="sim: ${all}">-->
+    <tr th:each="sim, iStat : ${all.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${sim.simulation_Name}"></td>
+        <td th:text="${sim.population_Size}"></td>
+        <td th:text="${sim.initial_Infected_Number}"></td>
+        <td th:text="${sim.how_Many_One_Infects}"></td>
+        <td th:text="${sim.mortality_Rate}"></td>
+        <td th:text="${sim.number_Of_Days_To_Recovery}"></td>
+        <td th:text="${sim.number_Of_Days_To_Death}"></td>
+        <td th:text="${sim.simulation_Time}"></td>
+        <td>
+            <a th:href="@{/updateSimulation/{id}(id=${sim.id})}" class="btn btn-primary">Update</a>
+            <a th:href="@{/deleteSimulation/{id}(id=${sim.id})}" class="btn btn-danger">Delete</a>
+            <a th:href="@{/SimulationsValuesById/{id}/(id=${sim.id})}" class="btn btn-primary">
+                Show values</a>
+        </td>
+    </tr>
+    </tbody>
 </table>
 <div style="display: inline" th:if="${allP.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
@@ -87,6 +95,9 @@ function myFunction() {
   var intt = document.getElementById("vall").value;
 location.href = 'http://localhost:8080/SimulationByName/'+intt;
 }
+
+
+
 
 </script>
 <br>

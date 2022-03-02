@@ -97,7 +97,7 @@ public class SimulationController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        model.addAttribute("all", simulationRepository.findAll());
+//        model.addAttribute("all", simulationRepository.findAll());
         return "allSimulations";
     }
 
@@ -123,7 +123,7 @@ public class SimulationController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        model.addAttribute("simulationsValues", simulationsValuesRepository.findAll());
+//        model.addAttribute("simulationsValues", simulationsValuesRepository.findAll());
         return "allSimsValues";
     }
 
@@ -167,7 +167,7 @@ public class SimulationController {
 //        model.addAttribute("simulationsValues", tt);
         /////////////////////////////////
 
-        model.addAttribute("simulationsValues", simulationRepository.getById(id).getSimulationsValues());
+//        model.addAttribute("simulationsValues", simulationRepository.getById(id).getSimulationsValues());
         return "allSimsSimulationValues";
     }
 

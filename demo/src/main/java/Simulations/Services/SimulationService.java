@@ -122,7 +122,8 @@ public class SimulationService {
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<SimulationsValues> list;
-        if (eachRemainingDayService.getSimulations().get(0).getSimulationsValues().size() < startItem) {
+        if (eachRemainingDayService.getSimulations().get(eachRemainingDayService.getSimulations().size() - 1)
+                .getSimulationsValues().size() < startItem) {
             list = Collections.emptyList();
         } else {
             int toIndex = Math.min(startItem + pageSize, eachRemainingDayService.getSimulations()
@@ -131,6 +132,6 @@ public class SimulationService {
                     .getSimulationsValues().subList(startItem, toIndex);
         }
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), eachRemainingDayService.getSimulations()
-                .size());
+                .get(eachRemainingDayService.getSimulations().size() - 1).getSimulationsValues().size());
     }
 }
