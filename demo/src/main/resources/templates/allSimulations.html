@@ -32,6 +32,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -61,7 +62,7 @@
             <td>
                 <a th:href="@{/updateSimulation/{id}(id=${sim.id})}" class="btn btn-primary">Update</a>
                 <a th:href="@{/deleteSimulation/{id}(id=${sim.id})}" class="btn btn-danger">Delete</a>
-                <a th:href="@{/SimulationsValuesById/{id}(id=${sim.id})}" class="btn btn-primary">
+                <a th:href="@{/SimulationsValuesById/{id}/(id=${sim.id})}" class="btn btn-primary">
                     Show values</a>
             </td>
         </tr>
@@ -86,6 +87,7 @@ function myFunction() {
   var intt = document.getElementById("vall").value;
 location.href = 'http://localhost:8080/SimulationByName/'+intt;
 }
+
 </script>
 <br>
 <td>

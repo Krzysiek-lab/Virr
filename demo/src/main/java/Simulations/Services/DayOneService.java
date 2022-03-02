@@ -49,9 +49,9 @@ public class DayOneService {
         var simulations = simulationRepository.getById(sim.get(sim.size() - 1).getId());
 
         var simulation_values = SimulationsValues.builder()
-                .day(1L)
+                .day(1d)
                 .healthy_Prone_To_Infection(simulation.getPopulation_Size() - simulation.getInitial_Infected_Number())
-                .number_Of_Infected(simulation.getInitial_Infected_Number())
+                .number_Of_Infected((double) simulation.getInitial_Infected_Number())
                 .dead(0d)
                 .regained_Health_And_Immunity(0d)
                 .build();

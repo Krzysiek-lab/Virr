@@ -19,10 +19,10 @@ public class SimulationsValues {
     private Long id;
 
     @Column(name = "Day")
-    private Long day;
+    private Double day;
 
     @Column(name = "Pi")
-    private Long number_Of_Infected;
+    private Double number_Of_Infected;
 
     @Column(name = "Pv")
     private Double healthy_Prone_To_Infection;
