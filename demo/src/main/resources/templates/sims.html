@@ -43,7 +43,7 @@
             <th>Pm</th>
             <th>Day</th>
         </tr>
-        <th:block th:each="sim :${simulations}">
+        <th:block th:each="sim :${simulationsVal}">
             <tr>
                 <td th:text="${sim.healthy_Prone_To_Infection}"></td>
                 <td th:text="${sim.regained_Health_And_Immunity}"></td>

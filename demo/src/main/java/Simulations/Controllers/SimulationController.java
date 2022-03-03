@@ -96,22 +96,20 @@ public class SimulationController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
-//        model.addAttribute("all", simulationRepository.findAll());
         return "allSimulations";
     }
 
 
-    @GetMapping("SimulationsValues/{name}/{day}")//to poprawic by dawalo konkretny dzien z konkretnej symulacji
+    @GetMapping("SimulationsValues/{name}/{day}")
     public String showSimulationsPerDay(@PathVariable("day") Double day, @PathVariable("name") String name, Model model) {
         var simulation = simulationRepository.findByName(name);
-        model.addAttribute("simulations", simulation.getSimulationsValues().stream().filter(e -> e.getDay()
-                .equals(day)));
+        model.addAttribute("simulationsVal", simulation.getSimulationsValues().stream().filter(e -> e.getDay()
+                .equals(day)).collect(Collectors.toList()));
         return "sims";
     }
 
 
-    @GetMapping("SimulationsValues")// do poprawy paginacja
+    @GetMapping("SimulationsValues")
     public String showAllSimulationsValues(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                            @RequestParam(value = "size", defaultValue = "5") Integer size, Model model) {
 
@@ -135,8 +133,8 @@ public class SimulationController {
                                                      @RequestParam(value = "page", defaultValue = "1") Integer page,
                                                      @RequestParam(value = "size", defaultValue = "5") Integer size,
                                                      Model model) {
-        Page<SimulationsValues> ratePage = simulationService.pagination(PageRequest.of(page - 1, size));
-        model.addAttribute("all", ratePage);
+        Page<SimulationsValues> ratePage = simulationService.pagination(id, PageRequest.of(page - 1, size));
+        model.addAttribute("allP", ratePage);
         int totalPages = ratePage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -144,7 +142,7 @@ public class SimulationController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
+        model.addAttribute("s", simulationRepository.findAll());
         ///////////////////////////
 //        var simulation_values = SimulationsValues.builder()
 //                .day(1L)// ok

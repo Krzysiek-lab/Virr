@@ -32,18 +32,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -62,8 +50,7 @@
     </tr>
     </thead>
     <tbody>
-    <!--    <th:block th:each="sim :${simulationsValues}">-->
-    <tr th:each="sim, iStat : ${all.content}"
+    <tr th:each="sim, iStat : ${allP.content}"
         th:style="${iStat.odd}? 'font-weight: bold;'"
         th:alt-title="${iStat.even}? 'even' : 'odd'">
         <td th:text="${sim.healthy_Prone_To_Infection}"></td>
@@ -73,16 +60,12 @@
     </tr>
     </tbody>
 </table>
-<div style="display: inline" th:if="${all.totalPages > 0}" class="pagination"
+<div style="display: inline" th:if="${allP.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/SimulationsValuesById/{id}/(size=${all.size}, page=${pageNumber})}"
+    <a th:href="@{/SimulationsValuesById/{id}/(size=${allP.size}, page=${pageNumber})}"
        th:text=${pageNumber}
-       th:class="${pageNumber==all.number + 1} ? active"></a>
+       th:class="${pageNumber==allP.number + 1} ? active"></a>
 </div>
-<br>
-Simulations:
-<br>
-<header th:insert="fragments/general.html :: header"></header>
 <br>
 Provide simulation name
 <input id="vall2" type="text" class="form-control col-2">
@@ -93,6 +76,26 @@ Provide day
     name
 </button>
 <br>
+<br>
+<br>
+Simulations:
+<br>
+<table>
+    <thead>
+    <tr class="table-striped">
+        <th>Name</th>
+        <th>Days</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="sim : ${s}">
+        <tr>
+            <td th:text="${sim.simulation_Name}"></td>
+            <td th:text="${sim.simulation_Time}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
 <br>
 <script>
 function myFunction2() {

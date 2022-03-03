@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -90,7 +91,7 @@ public class SimulationService {
 
     public Page<Simulation> paginationSimulations(Pageable pageable) {
         int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();// zmienic na wartosci dla konkretnej symulacji!!!S
+        int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Simulation> list;
         if (simulationRepository.count() < startItem) {
@@ -117,21 +118,25 @@ public class SimulationService {
     }
 
 
-    public Page<SimulationsValues> pagination(Pageable pageable) {
+    public Page<SimulationsValues> pagination(Long id, Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<SimulationsValues> list;
-        if (eachRemainingDayService.getSimulations().get(eachRemainingDayService.getSimulations().size() - 1)
-                .getSimulationsValues().size() < startItem) {
+        if (eachRemainingDayService.getSimulations().stream().filter(e -> e.getId().equals(id))
+                .collect(Collectors.toList()).get(0).getSimulationsValues().size() < startItem) {
             list = Collections.emptyList();
         } else {
-            int toIndex = Math.min(startItem + pageSize, eachRemainingDayService.getSimulations()
-                    .get(eachRemainingDayService.getSimulations().size() - 1).getSimulationsValues().size());
-            list = eachRemainingDayService.getSimulations().get(eachRemainingDayService.getSimulations().size() - 1)
+            int toIndex = Math.min(startItem + pageSize, (eachRemainingDayService.getSimulations().stream()
+                    .filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0)
+                    .getSimulationsValues().size()));
+            list = eachRemainingDayService.getSimulations().stream()
+                    .filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0)
                     .getSimulationsValues().subList(startItem, toIndex);
         }
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), eachRemainingDayService.getSimulations()
-                .get(eachRemainingDayService.getSimulations().size() - 1).getSimulationsValues().size());
+                .stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0)
+                .getSimulationsValues().size());
     }
+
 }
