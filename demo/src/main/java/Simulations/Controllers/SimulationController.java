@@ -143,31 +143,6 @@ public class SimulationController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         model.addAttribute("s", simulationRepository.findAll());
-        ///////////////////////////
-//        var simulation_values = SimulationsValues.builder()
-//                .day(1L)// ok
-//                .healthy_Prone_To_Infection(23d)//moze
-//                .regained_Health_And_Immunity(20L)// moze
-//                .dead(4L)// moze
-//                .day(1L)
-//                .build();
-//        var values = simulationsValuesRepository.save(simulation_values);
-//        var cos = eachRemainingDayService.getSimulations();
-//        var newestSimulation = cos.get(cos.size() - 1);
-//
-//        var list = newestSimulation.getSimulationsValues();
-//        list.add(values);
-//        newestSimulation.setSimulationsValues(list);
-//
-//        simulationRepository.save(newestSimulation);
-//
-//        var tt = newestSimulation.getSimulationsValues();
-//
-//
-//        model.addAttribute("simulationsValues", tt);
-        /////////////////////////////////
-
-//        model.addAttribute("simulationsValues", simulationRepository.getById(id).getSimulationsValues());
         return "allSimsSimulationValues";
     }
 

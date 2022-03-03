@@ -44,5 +44,5 @@ public class Simulation {
     private Long simulation_Time;
 
     @OneToMany(mappedBy = "simulation", cascade = CascadeType.REMOVE)
-    List<SimulationsValues> simulationsValues;
+    private List<SimulationsValues> simulationsValues;
 }

@@ -33,9 +33,9 @@ public class SimulationsValues {
     @Column(name = "Pr")
     private Double regained_Health_And_Immunity;
 
-    @JoinColumn(name = "simulation_id")
     @ManyToOne
-    Simulation simulation;
+    @JoinColumn(name = "simulation_id", referencedColumnName = "id")
+    private Simulation simulation;
 
 
 }

@@ -30,13 +30,13 @@ public class EachRemainingDayService {
     }
 
 
-    public List<Simulation> getSimulations() { // usunac public
+    public List<Simulation> getSimulations() {
         List<Simulation> listOdIds = new ArrayList<>(simulationRepository.findAll());
         listOdIds.sort(Comparator.comparing(Simulation::getId));
         return listOdIds;
     }
 
-    public List<SimulationsValues> getSimulationsValues() {// usunac public
+    public List<SimulationsValues> getSimulationsValues() {
         List<SimulationsValues> listOdIdsOfValues = new ArrayList<>(simulationsValuesRepository.findAll());
         listOdIdsOfValues.sort(Comparator.comparing(SimulationsValues::getId));
         return listOdIdsOfValues;
@@ -137,6 +137,7 @@ public class EachRemainingDayService {
 
 
                 var simId = simulationsValuesRepository.save(simulation_values);
+                simId.setSimulation(newestSimulation);//dodane
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId);
                 newestSimulation.setSimulationsValues(simVal2);
@@ -190,8 +191,7 @@ public class EachRemainingDayService {
                                         .stream().filter(e -> e.getDay() == finalI + 1 - finalNewestSimulation1
                                                 .getNumber_Of_Days_To_Recovery()))
                                         .collect(Collectors.toList()).get((int) (simulationsValuesRepository.findAll()
-                                        .stream()
-                                        .filter(e -> e.getDay() == finalI + 1 - finalNewestSimulation1
+                                        .stream().filter(e -> e.getDay() == finalI + 1 - finalNewestSimulation1
                                                 .getNumber_Of_Days_To_Recovery())).count() - 1)
                                         .getNumber_Of_Infected())// Z24
 
@@ -249,6 +249,7 @@ public class EachRemainingDayService {
                 /////////////
 
                 var simId = simulationsValuesRepository.save(simulation_values);
+                simId.setSimulation(newestSimulation);//dodane
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId);
                 newestSimulation.setSimulationsValues(simVal2);
@@ -277,6 +278,7 @@ public class EachRemainingDayService {
                         .build();
 
                 var simId2 = simulationsValuesRepository.save(simulation_values);
+                simId2.setSimulation(newestSimulation);//dodane
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId2);
                 newestSimulation.setSimulationsValues(simVal2);
@@ -305,6 +307,7 @@ public class EachRemainingDayService {
                         .build();
 
                 var simId2 = simulationsValuesRepository.save(simulation_values);
+                simId2.setSimulation(newestSimulation);//dodane
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId2);
                 newestSimulation.setSimulationsValues(simVal2);

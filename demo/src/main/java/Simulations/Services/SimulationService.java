@@ -127,14 +127,14 @@ public class SimulationService {
                 .collect(Collectors.toList()).get(0).getSimulationsValues().size() < startItem) {
             list = Collections.emptyList();
         } else {
-            int toIndex = Math.min(startItem + pageSize, (eachRemainingDayService.getSimulations().stream()
+            int toIndex = Math.min(startItem + pageSize, (simulationRepository.findAll().stream()
                     .filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0)
                     .getSimulationsValues().size()));
-            list = eachRemainingDayService.getSimulations().stream()
+            list = simulationRepository.findAll().stream()
                     .filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0)
                     .getSimulationsValues().subList(startItem, toIndex);
         }
-        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), eachRemainingDayService.getSimulations()
+        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), simulationRepository.findAll()
                 .stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0)
                 .getSimulationsValues().size());
     }
