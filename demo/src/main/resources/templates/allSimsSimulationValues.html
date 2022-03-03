@@ -43,6 +43,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -79,6 +80,10 @@
        th:class="${pageNumber==all.number + 1} ? active"></a>
 </div>
 <br>
+Simulations:
+<br>
+<header th:insert="fragments/general.html :: header"></header>
+<br>
 Provide simulation name
 <input id="vall2" type="text" class="form-control col-2">
 <br>
@@ -95,6 +100,7 @@ function myFunction2() {
   var intt2 = document.getElementById("vall3").value;
 location.href = 'http://localhost:8080/SimulationsValues/'+intt+'/'+intt2;
 }
+
 </script>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

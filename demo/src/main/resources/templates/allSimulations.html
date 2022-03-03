@@ -39,7 +39,7 @@
     </style>
 </head>
 <body>
-
+<div th:fragment="header">
 <table id="simulat" class="table table-bordered">
     <thead>
     <tr class="table-striped">
@@ -76,6 +76,7 @@
     </tr>
     </tbody>
 </table>
+</div>
 <div style="display: inline" th:if="${allP.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
     <a th:href="@{/allSimulations(size=${allP.size}, page=${pageNumber})}"
