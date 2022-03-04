@@ -59,7 +59,7 @@ public class DayOneService {
                 .build();
         var s = simulationsValuesRepository.save(simulation_values);
 
-
+        s.setSimulation(simulations);
         var simm = simulations.getSimulationsValues();
         simm.add(s);
         simulations.setSimulationsValues(simm);
