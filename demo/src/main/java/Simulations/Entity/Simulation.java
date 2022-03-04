@@ -26,7 +26,7 @@ public class Simulation {
     private Double population_Size;
 
     @Column(name = "I")
-    private Long initial_Infected_Number;
+    private Double initial_Infected_Number;
 
     @Column(name = "R")
     private Double how_Many_One_Infects;
@@ -35,13 +35,13 @@ public class Simulation {
     private Double mortality_Rate;
 
     @Column(name = "Ti")
-    private Long number_Of_Days_To_Recovery;
+    private Double number_Of_Days_To_Recovery;
 
     @Column(name = "Tm")
-    private Long number_Of_Days_To_Death;
+    private Double number_Of_Days_To_Death;
 
     @Column(name = "Ts")
-    private Long simulation_Time;
+    private Double simulation_Time;
 
     @OneToMany(mappedBy = "simulation", cascade = CascadeType.REMOVE)
     private List<SimulationsValues> simulationsValues;

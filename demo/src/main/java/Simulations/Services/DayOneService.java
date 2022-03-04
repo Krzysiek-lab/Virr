@@ -23,8 +23,8 @@ public class DayOneService {
 
 
     //1
-    public void generateSimulationValues(String N, Double P, Long I, Double R, Double M, Long Ti, Long Tm, Long Ts,
-                                         List<SimulationsValues> list) {
+    public void generateSimulationValues(String N, Double P, Double I, Double R, Double M, Double Ti, Double Tm,
+                                         Double Ts, List<SimulationsValues> list) {
         var simulation = Simulation.builder()
                 .simulation_Name(N)
                 .population_Size(P)

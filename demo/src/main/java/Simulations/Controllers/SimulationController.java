@@ -4,7 +4,6 @@ import Simulations.Entity.Simulation;
 import Simulations.Entity.SimulationsValues;
 import Simulations.Repositories.SimulationRepository;
 import Simulations.Repositories.SimulationsValuesRepository;
-import Simulations.Services.EachRemainingDayService;
 import Simulations.Services.SimulationService;
 import Simulations.ViewModels.SimulationViewModel;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,6 @@ public class SimulationController {
     public final SimulationRepository simulationRepository;
     public final SimulationsValuesRepository simulationsValuesRepository;
     public final SimulationService simulationService;
-    private final EachRemainingDayService eachRemainingDayService;//
 
 
     @GetMapping("SimulationsForm")

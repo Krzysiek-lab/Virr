@@ -126,12 +126,13 @@ public class EachRemainingDayService {
                         .regained_Health_And_Immunity(0d)// Z24
 
 
-                        .dead(newestSimulation.getMortality_Rate() * (double) ((simulationsValuesRepository
+                        .dead((newestSimulation.getMortality_Rate() * (double) ((simulationsValuesRepository
                                 .findAll().stream().filter(e -> e.getDay() == finalI + 1 - finalNewestSimulation1
                                         .getNumber_Of_Days_To_Death()))
                                 .collect(Collectors.toList()).get((int) (simulationsValuesRepository.findAll().stream()
                                         .filter(e -> e.getDay() == (finalI + 1 - finalNewestSimulation1
-                                                .getNumber_Of_Days_To_Death()))).count() - 1).getNumber_Of_Infected()))//V24
+                                                .getNumber_Of_Days_To_Death()))).count() - 1).getNumber_Of_Infected()))
+                                - newestSimulationsVal.getDead())//V24
 
                         .build();
 
@@ -196,12 +197,13 @@ public class EachRemainingDayService {
                                         .getNumber_Of_Infected())// Z24
 
 
-                        .dead(newestSimulation.getMortality_Rate() * (double) ((simulationsValuesRepository.findAll()
+                        .dead((newestSimulation.getMortality_Rate() * (double) ((simulationsValuesRepository.findAll()
                                 .stream().filter(e -> e.getDay() == finalI + 1 - finalNewestSimulation1
                                         .getNumber_Of_Days_To_Death()))
                                 .collect(Collectors.toList()).get((int) (simulationsValuesRepository.findAll().stream()
                                         .filter(e -> e.getDay() == (finalI + 1 - finalNewestSimulation1
-                                                .getNumber_Of_Days_To_Death()))).count() - 1).getNumber_Of_Infected()))//V24
+                                                .getNumber_Of_Days_To_Death()))).count() - 1).getNumber_Of_Infected()))
+                                - newestSimulationsVal.getDead())//V24
 
                         .build();
 

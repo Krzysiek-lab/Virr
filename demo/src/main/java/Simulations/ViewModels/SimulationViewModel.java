@@ -29,8 +29,7 @@ public class SimulationViewModel {
     @DecimalMin("0.0")
     private Double population_Size;
 
-    @NotNull(message = "field can not be empty")
-    private Long initial_Infected_Number;
+    private Double initial_Infected_Number;
 
     @NotNull(message = "field can not be empty")
     private Double how_Many_One_Infects;
@@ -40,16 +39,14 @@ public class SimulationViewModel {
     @DecimalMin("0.001")
     private Double mortality_Rate;
 
-    @NotNull(message = "field can not be empty")
-    @DecimalMin("1.0")
-    private Long number_Of_Days_To_Recovery;
+    private @NotNull(message = "field can not be empty") @DecimalMin("1.0")
+    Double number_Of_Days_To_Recovery;
 
-    @NotNull(message = "field can not be empty")
-    @DecimalMin("1.0")
-    private Long number_Of_Days_To_Death;
+    private @NotNull(message = "field can not be empty") @DecimalMin("1.0")
+    Double number_Of_Days_To_Death;
 
-    @NotNull(message = "field can not be empty")
-    private Long simulation_Time;
+    private @NotNull(message = "field can not be empty")
+    Double simulation_Time;
 
     List<SimulationsValues> simulationsValues = new ArrayList<>();
 }
