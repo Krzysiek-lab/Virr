@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Configuration
@@ -23,8 +24,8 @@ public class DayOneService {
 
 
     //1
-    public void generateSimulationValues(String N, Double P, Double I, Double R, Double M, Double Ti, Double Tm,
-                                         Double Ts, List<SimulationsValues> list) {
+    public void generateSimulationValues(String N, BigDecimal P, BigDecimal I, BigDecimal R, BigDecimal M, BigDecimal Ti,
+                                         BigDecimal Tm, BigDecimal Ts, List<SimulationsValues> list) {
         var simulation = Simulation.builder()
                 .simulation_Name(N)
                 .population_Size(P)
@@ -49,11 +50,12 @@ public class DayOneService {
         var simulations = simulationRepository.getById(sim.get(sim.size() - 1).getId());
 
         var simulation_values = SimulationsValues.builder()
-                .day(1d)
-                .healthy_Prone_To_Infection(simulation.getPopulation_Size() - simulation.getInitial_Infected_Number())
-                .number_Of_Infected((double) simulation.getInitial_Infected_Number())
-                .dead(0d)
-                .regained_Health_And_Immunity(0d)
+                .day(BigDecimal.valueOf(1))
+                .healthy_Prone_To_Infection(simulation.getPopulation_Size().subtract(simulation
+                        .getInitial_Infected_Number()))
+                .number_Of_Infected(simulation.getInitial_Infected_Number())
+                .dead(BigDecimal.valueOf(0))
+                .regained_Health_And_Immunity(BigDecimal.valueOf(0))
                 .build();
         var s = simulationsValuesRepository.save(simulation_values);
 

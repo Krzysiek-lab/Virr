@@ -8,6 +8,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,26 +28,26 @@ public class SimulationViewModel {
     @NotNull(message = "field can not be empty")
     @DecimalMax("10000000000.0")
     @DecimalMin("0.0")
-    private Double population_Size;
+    private BigDecimal population_Size;
 
-    private Double initial_Infected_Number;
+    private BigDecimal initial_Infected_Number;
 
     @NotNull(message = "field can not be empty")
-    private Double how_Many_One_Infects;
+    private BigDecimal how_Many_One_Infects;
 
     @NotNull(message = "field can not be empty")
     @DecimalMax("1.0")
     @DecimalMin("0.001")
-    private Double mortality_Rate;
+    private BigDecimal mortality_Rate;
 
-    private @NotNull(message = "field can not be empty") @DecimalMin("1.0")
-    Double number_Of_Days_To_Recovery;
+     @NotNull(message = "field can not be empty") @DecimalMin("1.0")
+     private BigDecimal number_Of_Days_To_Recovery;
 
-    private @NotNull(message = "field can not be empty") @DecimalMin("1.0")
-    Double number_Of_Days_To_Death;
+     @NotNull(message = "field can not be empty") @DecimalMin("1.0")
+     private BigDecimal number_Of_Days_To_Death;
 
-    private @NotNull(message = "field can not be empty")
-    Double simulation_Time;
+     @NotNull(message = "field can not be empty")
+     private  BigDecimal simulation_Time;
 
     List<SimulationsValues> simulationsValues = new ArrayList<>();
 }

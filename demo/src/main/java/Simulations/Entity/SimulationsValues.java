@@ -3,6 +3,7 @@ package Simulations.Entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Builder
 @Table
@@ -19,19 +20,19 @@ public class SimulationsValues {
     private Long id;
 
     @Column(name = "Day")
-    private Double day;
+    private BigDecimal day;
 
     @Column(name = "Pi")
-    private Double number_Of_Infected;
+    private BigDecimal number_Of_Infected;
 
     @Column(name = "Pv")
-    private Double healthy_Prone_To_Infection;
+    private BigDecimal healthy_Prone_To_Infection;
 
     @Column(name = "Pm")
-    private Double dead;
+    private BigDecimal dead;
 
     @Column(name = "Pr")
-    private Double regained_Health_And_Immunity;
+    private BigDecimal regained_Health_And_Immunity;
 
     @ManyToOne
     @JoinColumn(name = "simulation_id", referencedColumnName = "id")
