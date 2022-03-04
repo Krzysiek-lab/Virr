@@ -35,6 +35,6 @@ class RangeValidator implements ConstraintValidator<GreaterThan, SimulationViewM
         if (dto.getNumber_Of_Days_To_Death() == null || dto.getNumber_Of_Days_To_Recovery() == null) {
             return false;// z true zmiana
         }
-        return dto.getNumber_Of_Days_To_Death() < dto.getNumber_Of_Days_To_Recovery();
+        return dto.getNumber_Of_Days_To_Death().doubleValue() < dto.getNumber_Of_Days_To_Recovery().doubleValue();
     }
 }
