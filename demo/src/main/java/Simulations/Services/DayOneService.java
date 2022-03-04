@@ -63,10 +63,8 @@ public class DayOneService {
         var simm = simulations.getSimulationsValues();
         simm.add(s);
         simulations.setSimulationsValues(simm);
-        simulationRepository.save(simulations);
         return "";
     }
-
 
     //@PostConstruct
     //@DependsOn("Simulation")

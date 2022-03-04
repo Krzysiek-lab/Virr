@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -99,10 +100,12 @@ public class SimulationController {
 
 
     @GetMapping("SimulationsValues/{name}/{day}")
-    public String showSimulationsPerDay(@PathVariable("day") Double day, @PathVariable("name") String name, Model model) {
+    public String showSimulationsPerDay(@PathVariable("day") BigDecimal day, @PathVariable("name") String name,
+                                        Model model) {
         var simulation = simulationRepository.findByName(name);
-        model.addAttribute("simulationsVal", simulation.getSimulationsValues().stream().filter(e -> e.getDay()
-                .equals(day)).collect(Collectors.toList()));
+        var dayOne = simulation.getSimulationsValues().stream().filter(e -> e.getDay()
+                .equals(day.setScale(2))).collect(Collectors.toList()).get(0);
+        model.addAttribute("simulationsVal", dayOne);
         return "sims";
     }
 

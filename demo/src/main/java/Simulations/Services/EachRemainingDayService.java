@@ -126,7 +126,6 @@ public class EachRemainingDayService {
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId);
                 newestSimulation.setSimulationsValues(simVal2);
-                simulationRepository.save(newestSimulation);
 
             } else if (i >= newestSimulation.getNumber_Of_Days_To_Recovery().doubleValue()) {
 
@@ -215,7 +214,6 @@ public class EachRemainingDayService {
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId);
                 newestSimulation.setSimulationsValues(simVal2);
-                simulationRepository.save(newestSimulation);
 
             } else if (i == 2) {
                 sim = getSimulations();
@@ -243,7 +241,6 @@ public class EachRemainingDayService {
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId2);
                 newestSimulation.setSimulationsValues(simVal2);
-                simulationRepository.save(newestSimulation);
 
             } else {
                 sim = getSimulations();
@@ -272,7 +269,6 @@ public class EachRemainingDayService {
                 var simVal2 = newestSimulation.getSimulationsValues();
                 simVal2.add(simId2);
                 newestSimulation.setSimulationsValues(simVal2);
-                simulationRepository.save(newestSimulation);
 
             }
         }
