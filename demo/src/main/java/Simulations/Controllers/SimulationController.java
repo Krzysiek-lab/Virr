@@ -131,9 +131,7 @@ public class SimulationController {
                                                      @RequestParam(value = "page", defaultValue = "1") Integer page,
                                                      @RequestParam(value = "size", defaultValue = "5") Integer size,
                                                      Model model) {
-
-        var idS = simulationRepository.getById(id).getId();
-        model.addAttribute("idS", idS);
+        model.addAttribute("idS", id);
 
         Page<SimulationsValues> ratePage = simulationService.pagination(id, PageRequest.of(page - 1, size));
         model.addAttribute("allP", ratePage);
