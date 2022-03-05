@@ -1,6 +1,7 @@
 package Simulations.ViewModels;
 
 import Simulations.Annotations.GreaterThan;
+import Simulations.Annotations.GreaterThanInitialAnnotation;
 import Simulations.Annotations.GreaterThanTimeAnnotation;
 import Simulations.Entity.SimulationsValues;
 import lombok.*;
@@ -21,6 +22,10 @@ import java.util.List;
 @GreaterThan(message = "field number of days to death can not be equal or bigger than field days to recovery")
 @GreaterThanTimeAnnotation(message = "field simulation Time can not be equal or smaller than field days to death " +
         "and field days to recovery")
+@GreaterThanInitialAnnotation(message = "fields initial infected number and how many one infects can not be equal or " +
+        "bigger than field population size " +
+        "and field days to recovery")
+
 public class SimulationViewModel {
 
     private Long id;

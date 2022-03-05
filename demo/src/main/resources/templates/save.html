@@ -14,7 +14,7 @@
     <hr>
     <h2>Save simulation</h2>
 
-    <form id="form" action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
+    <form  action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
         <div th:if="${#fields.hasErrors('simulation_Name')}" th:errors="*{simulation_Name}">Invalid Name</div>
         <a>Simulation name</a>
         <input type="text" th:field="*{simulation_Name}" placeholder="simulation name" class="form-control mb-4 col-4">
@@ -83,7 +83,7 @@
 
 
         <button type="submit">
-            <span>Send</span>
+            <span>Submit</span>
             <svg
                     aria-hidden="true"
                     focusable="false"
