@@ -5,7 +5,6 @@ import Simulations.Entity.SimulationsValues;
 import Simulations.Repositories.SimulationRepository;
 import Simulations.Repositories.SimulationsValuesRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -115,29 +113,29 @@ class DemoApplicationTests {
 //        Assertions.assertThat(!simulationsValuesRepository.findAll().isEmpty());
 //    }
 
-    @BeforeEach
-    void setUp() {
-
-        simulation1 = Simulation.builder()
-                .simulation_Name("TEST")
-                .population_Size(BigDecimal.valueOf(1000000000))
-                .initial_Infected_Number(BigDecimal.valueOf(1))
-                .how_Many_One_Infects(BigDecimal.valueOf(2))
-                .mortality_Rate(BigDecimal.valueOf(0.9))
-                .number_Of_Days_To_Recovery(BigDecimal.valueOf(14))
-                .number_Of_Days_To_Death(BigDecimal.valueOf(12))
-                .simulation_Time(BigDecimal.valueOf(17))
-                .simulationsValues(List.of(l1))
-                .build();
-
-        l1 = SimulationsValues.builder()
-                .id(1L)
-                .day(BigDecimal.valueOf(10))
-                .number_Of_Infected(BigDecimal.valueOf(10))
-                .healthy_Prone_To_Infection(BigDecimal.valueOf(10))
-                .regained_Health_And_Immunity(BigDecimal.valueOf(10))
-                .simulation(simulation1)
-                .build();
-    }
+//    @BeforeEach
+//    void setUp() {
+//
+//        simulation1 = Simulation.builder()
+//                .simulation_Name("TEST")
+//                .population_Size(BigDecimal.valueOf(1000000000))
+//                .initial_Infected_Number(BigDecimal.valueOf(1))
+//                .how_Many_One_Infects(BigDecimal.valueOf(2))
+//                .mortality_Rate(BigDecimal.valueOf(0.9))
+//                .number_Of_Days_To_Recovery(BigDecimal.valueOf(14))
+//                .number_Of_Days_To_Death(BigDecimal.valueOf(12))
+//                .simulation_Time(BigDecimal.valueOf(17))
+//                .simulationsValues(List.of(l1))
+//                .build();
+//
+//        l1 = SimulationsValues.builder()
+//                .id(1L)
+//                .day(BigDecimal.valueOf(10))
+//                .number_Of_Infected(BigDecimal.valueOf(10))
+//                .healthy_Prone_To_Infection(BigDecimal.valueOf(10))
+//                .regained_Health_And_Immunity(BigDecimal.valueOf(10))
+//                .simulation(simulation1)
+//                .build();
+//    }
 
 }
