@@ -1,6 +1,7 @@
 package Simulations.ViewModels;
 
 import Simulations.Annotations.GreaterThan;
+import Simulations.Annotations.GreaterThanTimeAnnotation;
 import Simulations.Entity.SimulationsValues;
 import lombok.*;
 
@@ -18,6 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @GreaterThan(message = "field number of days to death can not be equal or bigger than field days to recovery")
+@GreaterThanTimeAnnotation(message = "field simulation Time can not be equal or smaller than field days to death " +
+        "and field days to recovery")
 public class SimulationViewModel {
 
     private Long id;
@@ -40,14 +43,16 @@ public class SimulationViewModel {
     @DecimalMin("0.001")
     private BigDecimal mortality_Rate;
 
-     @NotNull(message = "field can not be empty") @DecimalMin("1.0")
-     private BigDecimal number_Of_Days_To_Recovery;
+    @NotNull(message = "field can not be empty")
+    @DecimalMin("1.0")
+    private BigDecimal number_Of_Days_To_Recovery;
 
-     @NotNull(message = "field can not be empty") @DecimalMin("1.0")
-     private BigDecimal number_Of_Days_To_Death;
+    @NotNull(message = "field can not be empty")
+    @DecimalMin("1.0")
+    private BigDecimal number_Of_Days_To_Death;
 
-     @NotNull(message = "field can not be empty")
-     private  BigDecimal simulation_Time;
+    @NotNull(message = "field can not be empty")
+    private BigDecimal simulation_Time;
 
     List<SimulationsValues> simulationsValues = new ArrayList<>();
 }
