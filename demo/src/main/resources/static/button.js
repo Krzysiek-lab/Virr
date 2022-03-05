@@ -1,8 +1,8 @@
-const form = document.getElementById('form');
+const form = document.getElementById("form");
 
-form.addEventListener('submit', function (event) {
+form.addEventListener("submit", function (event) {
   event.preventDefault();
-  const button = form.querySelector('button');
-  button.classList.add('loading');
+  const button = form.querySelector("button");
+  button.classList.add("loading");
   button.disabled = true;
 });

@@ -14,7 +14,7 @@
     <hr>
     <h2>Save simulation</h2>
 
-    <form action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
+    <form id="form" action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
         <div th:if="${#fields.hasErrors('simulation_Name')}" th:errors="*{simulation_Name}">Invalid Name</div>
         <a>Simulation name</a>
         <input type="text" th:field="*{simulation_Name}" placeholder="simulation name" class="form-control mb-4 col-4">
@@ -83,37 +83,14 @@
 
 
         <button type="submit">
-            <span>Send</span>
-            <svg
-                    aria-hidden="true"
-                    focusable="false"
-                    class="loader loading"
-                    viewBox="0 0 38 38"
-            >
-                <g
-                        transform="translate(2 2)"
-                        stroke="currentColor"
-                        stroke-width="4"
-                        fill-rule="evenodd"
-                >
+            <span>Submit</span>
+            <svg aria-hidden="true" focusable="false" class="loader loading" viewBox="0 0 38 38">
+                <g transform="translate(2 2)" stroke="currentColor" stroke-width="4" fill-rule="evenodd">
                     <circle class="st0" stroke-opacity=".5" cx="17" cy="17" r="16.5"></circle>
-                    <path
-                            class="st1"
-                            d="M33.5 17C33.5 7.9 26.1.5 17 .5"
-                            transform="rotate(249.767 17 17)"
-                    >
-                        <animateTransform
-                                accumulate="none"
-                                additive="replace"
-                                attributeName="transform"
-                                calcMode="linear"
-                                dur="1s"
-                                from="0 17 17"
-                                repeatCount="indefinite"
-                                restart="always"
-                                to="360 17 17"
-                                type="rotate"
-                        ></animateTransform>
+                    <path class="st1" d="M33.5 17C33.5 7.9 26.1.5 17 .5" transform="rotate(249.767 17 17)">
+                        <animateTransform accumulate="none" additive="replace" attributeName="transform"
+                                          calcMode="linear" dur="1s" from="0 17 17" repeatCount="indefinite"
+                                          restart="always" to="360 17 17" type="rotate"></animateTransform>
                     </path>
                 </g>
             </svg>

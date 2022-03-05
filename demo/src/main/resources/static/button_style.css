@@ -1,3 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 45px;
+  padding: 0 12px;
+  border: 1px solid #989691;
+  box-shadow: inset 0 4px 0 #efede8;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 button {
   background-color: #0071b2;
   color: #fff;
@@ -7,23 +33,32 @@ button {
   font-weight: 700;
   padding: 0.75em 1em;
   position: relative;
-}
-
-button * {
-  transition: opacity 0.3s ease-in;
-}
-
-button .loader {
-  position: absolute;
-  display: block;
-  fill: transparent;
-  top: calc(50% - 0.75rem);
-  left: calc(50% - 0.75rem);
-  width: 1.5rem;
-  height: 1.5rem;
-  animation: rotating 1.5s linear infinite;
-  display: none;
-  opacity: 0;
+  * {
+    transition: opacity 0.3s ease-in;
+  }
+  .loader {
+    position: absolute;
+    display: block;
+    fill: transparent;
+    top: calc(50% - 0.75rem);
+    left: calc(50% - 0.75rem);
+    width: 1.5rem;
+    height: 1.5rem;
+    animation: rotating 1.5s linear infinite;
+    display: none;
+    opacity: 0;
+  }
+  &.loading {
+    span {
+      color: transparent;
+      opacity: 0;
+    }
+    .loader {
+      fill: transparent;
+      display: block;
+      opacity: 1;
+    }
+  }
 }
 
 @-webkit-keyframes rotating {
@@ -41,14 +76,4 @@ button .loader {
   to {
     transform: rotate(1turn);
   }
-}
-
-button.loading span {
-  color: transparent;
-  opacity: 0;
-}
-button.loading .loader {
-  fill: transparent;
-  display: block;
-  opacity: 1;
 }
