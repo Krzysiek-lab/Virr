@@ -14,7 +14,8 @@
     <hr>
     <h2>Save simulation</h2>
 
-    <form  action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
+    <!--    id="form"-->
+    <form action="#" th:action="@{SimulationsForm}" th:object="${sim}" method="POST">
         <div th:if="${#fields.hasErrors('simulation_Name')}" th:errors="*{simulation_Name}">Invalid Name</div>
         <a>Simulation name</a>
         <input type="text" th:field="*{simulation_Name}" placeholder="simulation name" class="form-control mb-4 col-4">
