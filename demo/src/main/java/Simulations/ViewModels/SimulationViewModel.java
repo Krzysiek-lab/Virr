@@ -23,8 +23,7 @@ import java.util.List;
 @GreaterThanTimeAnnotation(message = "field simulation Time can not be equal or smaller than field days to death " +
         "and field days to recovery")
 @GreaterThanInitialAnnotation(message = "fields initial infected number and how many one infects can not be equal or " +
-        "bigger than field population size " +
-        "and field days to recovery")
+        "bigger than field population size")
 
 public class SimulationViewModel {
 
