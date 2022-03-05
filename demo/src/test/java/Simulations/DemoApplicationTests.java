@@ -1,8 +1,11 @@
 package Simulations;
 
 import Simulations.Entity.Simulation;
+import Simulations.Entity.SimulationsValues;
 import Simulations.Repositories.SimulationRepository;
+import Simulations.Repositories.SimulationsValuesRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -10,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,7 +24,14 @@ class DemoApplicationTests {
     SimulationRepository simulationRepository;
 
     @Autowired
+    SimulationsValuesRepository simulationsValuesRepository;
+
+    @Autowired
     TestEntityManager testEntityManager;
+
+    SimulationsValues l1 = new SimulationsValues();
+
+    Simulation simulation1 = new Simulation();
 
 
     @Test
@@ -85,5 +96,48 @@ class DemoApplicationTests {
         Assertions.assertThat(simulation).hasSize(1).contains(simulationEntity);
     }
 
+
+//    @Test
+//    public void should_calculate_remaining_days() {
+//        //given
+//        EachRemainingDayService eachRemainingDayService =
+//                new EachRemainingDayService(simulationRepository, simulationsValuesRepository);
+//        DayOneService dayOneService = new DayOneService(simulationsValuesRepository, eachRemainingDayService
+//                , simulationRepository);
+//
+//        //when
+//        simulationRepository.save(simulation1);
+//        simulationsValuesRepository.save(l1);
+//        dayOneService.generateSimulationForDayOne(simulation1);
+//
+//        //then
+//        Assertions.assertThat(!simulationRepository.findAll().isEmpty());
+//        Assertions.assertThat(!simulationsValuesRepository.findAll().isEmpty());
+//    }
+
+    @BeforeEach
+    void setUp() {
+
+        simulation1 = Simulation.builder()
+                .simulation_Name("TEST")
+                .population_Size(BigDecimal.valueOf(1000000000))
+                .initial_Infected_Number(BigDecimal.valueOf(1))
+                .how_Many_One_Infects(BigDecimal.valueOf(2))
+                .mortality_Rate(BigDecimal.valueOf(0.9))
+                .number_Of_Days_To_Recovery(BigDecimal.valueOf(14))
+                .number_Of_Days_To_Death(BigDecimal.valueOf(12))
+                .simulation_Time(BigDecimal.valueOf(17))
+                .simulationsValues(List.of(l1))
+                .build();
+
+        l1 = SimulationsValues.builder()
+                .id(1L)
+                .day(BigDecimal.valueOf(10))
+                .number_Of_Infected(BigDecimal.valueOf(10))
+                .healthy_Prone_To_Infection(BigDecimal.valueOf(10))
+                .regained_Health_And_Immunity(BigDecimal.valueOf(10))
+                .simulation(simulation1)
+                .build();
+    }
 
 }
