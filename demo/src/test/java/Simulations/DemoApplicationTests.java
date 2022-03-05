@@ -1,13 +1,89 @@
 package Simulations;
 
+import Simulations.Entity.Simulation;
+import Simulations.Repositories.SimulationRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-@SpringBootTest
+import java.math.BigDecimal;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class DemoApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+
+    @Autowired
+    SimulationRepository simulationRepository;
+
+    @Autowired
+    TestEntityManager testEntityManager;
+
+
+    @Test
+    public void it_should_save_Entity() {
+        Simulation simulationEntity = new Simulation();
+        simulationEntity.setSimulation_Name("TEST");
+        simulationEntity.setPopulation_Size(BigDecimal.valueOf(1000000000));
+        simulationEntity.setInitial_Infected_Number(BigDecimal.valueOf(1));
+        simulationEntity.setHow_Many_One_Infects(BigDecimal.valueOf(2));
+        simulationEntity.setMortality_Rate(BigDecimal.valueOf(0.9));
+        simulationEntity.setNumber_Of_Days_To_Recovery(BigDecimal.valueOf(14));
+        simulationEntity.setNumber_Of_Days_To_Death(BigDecimal.valueOf(12));
+        simulationEntity.setSimulation_Time(BigDecimal.valueOf(17));
+        Simulation simulation = simulationRepository.save(simulationEntity);
+
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("simulation_Name", "TEST");
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("population_Size", BigDecimal
+                .valueOf(1000000000));
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("initial_Infected_Number", BigDecimal
+                .valueOf(1));
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("how_Many_One_Infects", BigDecimal
+                .valueOf(2));
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("mortality_Rate", BigDecimal.valueOf(0.9));
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("number_Of_Days_To_Recovery", BigDecimal
+                .valueOf(14));
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("number_Of_Days_To_Death", BigDecimal
+                .valueOf(12));
+        Assertions.assertThat(simulation).hasFieldOrPropertyWithValue("simulation_Time", BigDecimal.valueOf(17));
+    }
+
+
+    @Test
+    public void should_find_all_Entities() {
+        Simulation simulationEntity = new Simulation();
+        simulationEntity.setSimulation_Name("TEST");
+        simulationEntity.setPopulation_Size(BigDecimal.valueOf(1000000000));
+        simulationEntity.setInitial_Infected_Number(BigDecimal.valueOf(1));
+        simulationEntity.setHow_Many_One_Infects(BigDecimal.valueOf(2));
+        simulationEntity.setMortality_Rate(BigDecimal.valueOf(0.9));
+        simulationEntity.setNumber_Of_Days_To_Recovery(BigDecimal.valueOf(14));
+        simulationEntity.setNumber_Of_Days_To_Death(BigDecimal.valueOf(12));
+        simulationEntity.setSimulation_Time(BigDecimal.valueOf(17));
+        testEntityManager.persist(simulationEntity);
+        Iterable<Simulation> simulationEntities = simulationRepository.findAll();
+        Assertions.assertThat(simulationEntities).hasSize(1).contains(simulationEntity);
+    }
+
+
+    @Test
+    public void should_find_Entity_By_Name() {
+        Simulation simulationEntity = new Simulation();
+        simulationEntity.setSimulation_Name("TEST");
+        simulationEntity.setPopulation_Size(BigDecimal.valueOf(1000000000));
+        simulationEntity.setInitial_Infected_Number(BigDecimal.valueOf(1));
+        simulationEntity.setHow_Many_One_Infects(BigDecimal.valueOf(2));
+        simulationEntity.setMortality_Rate(BigDecimal.valueOf(0.9));
+        simulationEntity.setNumber_Of_Days_To_Recovery(BigDecimal.valueOf(14));
+        simulationEntity.setNumber_Of_Days_To_Death(BigDecimal.valueOf(12));
+        simulationEntity.setSimulation_Time(BigDecimal.valueOf(17));
+        testEntityManager.persist(simulationEntity);
+        Iterable<Simulation> simulation = simulationRepository.findByName(simulationEntity.getSimulation_Name());
+        Assertions.assertThat(simulation).hasSize(1).contains(simulationEntity);
+    }
+
 
 }

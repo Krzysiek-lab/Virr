@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -103,8 +104,11 @@ public class SimulationController {
     public String showSimulationsPerDay(@PathVariable("day") BigDecimal day, @PathVariable("name") String name,
                                         Model model) {
         var simulation = simulationRepository.findByName(name);
-        var dayOne = simulation.getSimulationsValues().stream().filter(e -> e.getDay()
-                .equals(day.setScale(2))).collect(Collectors.toList()).get(0);
+
+        var dayOne = simulation.stream().map(Simulation::getSimulationsValues)
+                .flatMap(Collection::stream).filter(w -> w.getDay().equals(day.setScale(2)))
+                .collect(Collectors.toList());
+
         model.addAttribute("simulationsVal", dayOne);
         return "sims";
     }
