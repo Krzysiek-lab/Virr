@@ -104,15 +104,14 @@ class DemoApplicationTests {
 //                , simulationRepository);
 //
 //        //when
-//        simulationRepository.save(simulation1);
-//        simulationsValuesRepository.save(l1);
+//
 //        dayOneService.generateSimulationForDayOne(simulation1);
 //
 //        //then
 //        Assertions.assertThat(!simulationRepository.findAll().isEmpty());
 //        Assertions.assertThat(!simulationsValuesRepository.findAll().isEmpty());
 //    }
-
+//
 //    @BeforeEach
 //    void setUp() {
 //
@@ -127,6 +126,7 @@ class DemoApplicationTests {
 //                .simulation_Time(BigDecimal.valueOf(17))
 //                .simulationsValues(List.of(l1))
 //                .build();
+//        simulationRepository.save(simulation1);
 //
 //        l1 = SimulationsValues.builder()
 //                .id(1L)
@@ -136,6 +136,7 @@ class DemoApplicationTests {
 //                .regained_Health_And_Immunity(BigDecimal.valueOf(10))
 //                .simulation(simulation1)
 //                .build();
+//        simulationsValuesRepository.save(l1);
 //    }
 
 }
