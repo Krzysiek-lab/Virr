@@ -1,4 +1,4 @@
-# Virr is an application that calculates and outputs data in regard to a simulation of an epidemic.
+# Virr is an application that runs simulations of an epidemic after an user provides starting variables.
 To run this application using docker you need to:
 1. docker pull ignatiuk/virr:baza
 2. docker pull ignatiuk/virr:apka
