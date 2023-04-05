@@ -7,4 +7,4 @@ To run this application using docker you need to:
 5. psql -U postgres
 6. CREATE DATABASE vir;  (steps 3-5 creating a database in ignatiuk/virr:baza container)
 7. docker run -p 8888:8888 -d ignatiuk/virr:apka
-
+8. application is now available at http://localhost:8888/allSimulations
